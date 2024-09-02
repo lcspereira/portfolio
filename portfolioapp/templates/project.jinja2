@@ -1,0 +1,14 @@
+{% load 'en/base' %}
+
+{% block title %}{{ project.name }}{% endblock %}
+{% block content %}
+    <p>{{ project.description }}</p>
+    <p>
+    {% {% for tech  in project.technologies %}
+        {{ tech }}{% if not forloop.last %}, {% endif %}
+    {% endfor %}%}
+    </p>
+    {% for img in project.images %}
+        <img src="{{ img.image }}" alt="{{ img.image }}">
+    {% endfor %}
+{% endblock %}

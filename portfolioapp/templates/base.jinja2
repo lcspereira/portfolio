@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">Lucas Pereira</a>
+                <a href="#" data-target="mobile-menu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="{% url 'index' %}">Início</a></li>
+                    <li><a href="{% url 'about' %}">Sobre</a></li>
+                    <li><a href="{% url 'projects' %}">Projetos</a></li>
+                    <li><a href="{% url 'contact' %}">Contato</a></li>
+                    <!-- language selector dropdown -->
+                    <li>
+                        <a class="dropdown-trigger" href="#!" data-target="dropdown1">Idioma<i class="material-icons right">arrow_drop_down</i></a>
+                        <ul id="dropdown1" class="dropdown-content">
+                            <li><a href="#!">English</a></li>
+                            <li><a href="#!">Português</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <ul class="sidenav" id="mobile-menu">
+            <li><a href="{% url 'index' %}">Início</a></li>
+            <li><a href="{% url 'about' %}">Sobre</a></li>
+            <li><a href="{% url 'projects' %}">Projetos</a></li>
+            <li><a href="{% url 'contact' %}">Contato</a></li>
+            <!-- language selector dropdown -->
+            <li>
+                <a class="dropdown-trigger" href="#!" data-target="dropdown1">Idioma<i class="material-icons right">arrow_drop_down</i></a>
+                <ul id="dropdown1" class="dropdown-content">
+                    <li><a href="#!">English</a></li>
+                    <li><a href="#!">Português</a></li>
+                </ul>
+            </li>
+        </ul>
+    </header>
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <p class="grey-text text-lighten-4">&copy; {{ current_year }} Lucas Pereira. Todos os direitos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let modalElems = document.querySelectorAll('.modal');
+            let modalInstances = M.Modal.init(modalElems);
+            let dropdownElems = document.querySelectorAll('.dropdown-trigger');
+            let dropdownInstances = M.Dropdown.init(dropdownElems);
+            let sidenavElems = document.querySelectorAll('.sidenav');
+            let sidenavInstances = M.Sidenav.init(sidenavElems);
+        });
+    </script>
+</body>
+</html>

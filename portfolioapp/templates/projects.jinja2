@@ -1,0 +1,44 @@
+{% extends "base.jinja2" %}
+{% block title %}Projetos{% endblock %}
+{% block content %}
+    <h1>Projetos</h1>
+    <!-- list projects as cards -->
+    <div class="row">
+        {% for project in projects %}
+            <div class="col s12 m6 l4">
+                <img class="activator" >
+                <div class="card">
+                    <div class="card-image">
+                        <a class="modal-trigger" href="#modal{{ project.id }}"><img  src="{{ project.images.first.image }}" alt="{{ project.images.first.image }}"></a>>
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title">
+                            <a class="modal-trigger" href="#modal{{ project.id }}">{{ project.title_pt }}</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% for project in projects %}
+        <div id="modal{{ project.id }}" class="modal">
+            <div class="modal-content">
+                <h4>{{ project.title_pt }}</h4>
+                <p>{{ project.description_pt|safe }}</p>
+                <p>
+                    <h6>Tecnologias</h6>
+                    {% for tech in project.technologies.all %}
+                        {{ tech }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+                {% for img in project.images.all %}
+                    <img src="{{ img.image }}" alt="{{ img.image }}">
+                {% endfor %}
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Fechar</a>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
