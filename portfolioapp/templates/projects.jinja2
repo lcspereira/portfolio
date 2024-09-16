@@ -1,18 +1,18 @@
 {% extends "base.jinja2" %}
 {% block title %}Projetos{% endblock %}
 {% block content %}
-    <h1>Projetos</h1>
+    <h1 class="white-text">Projetos</h1>
     <!-- list projects as cards -->
     <div class="row">
         {% for project in projects %}
             <div class="col s12 m6 l4">
-                <div class="card">
-                    <div class="card-image">
-                        <a class="modal-trigger" href="#modal{{ project.id }}"><img  src="{{ project.images.first.image }}" alt="{{ project.images.first.image }}"></a>
+                <div class="card grey darken-3">
+                    <div class="card-image white-text">
+                        <a class="modal-trigger white-text" href="#modal{{ project.id }}"><img  src="{{ project.images.first.image }}" alt="{{ project.images.first.image }}"></a>
                     </div>
-                    <div class="card-content">
-                        <span class="card-title">
-                            <a class="modal-trigger" href="#modal{{ project.id }}">{{ project.title_pt }}</a>
+                    <div class="card-content white-text">
+                        <span class="card-title white-text">
+                            <a class="modal-trigger wihte-text" href="#modal{{ project.id }}">{{ project.title_pt }}</a>
                         </span>
                     </div>
                 </div>
@@ -21,7 +21,7 @@
     </div>
 
     {% for project in projects %}
-        <div id="modal{{ project.id }}" class="modal">
+        <div id="modal{{ project.id }}" class="modal grey white-text darken-3">
             <div class="modal-content">
                 <h4>{{ project.title_pt }}</h4>
                 <p>{{ project.description_pt|safe }}</p>
@@ -35,8 +35,8 @@
                     <img src="{{ img.image }}" alt="{{ img.image }}">
                 {% endfor %}
             </div>
-            <div class="modal-footer">
-                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Fechar</a>
+            <div class="modal-footer blue">
+                <a href="#!" class="modal-close waves-effect waves-green btn-flat grey darken-3 white-text">Fechar</a>
             </div>
         </div>
     {% endfor %}

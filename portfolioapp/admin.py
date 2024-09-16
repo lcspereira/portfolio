@@ -10,10 +10,12 @@ admin.site.register(Technology)
 
 
 class ProjectAdmin(admin.ModelAdmin):
+    # Set rich text editor for text fields
     formfield_overrides = {
         models.TextField: {'widget': SummernoteWidget()},
     }
     fields = ['title_en', 'title_pt', 'description_en', 'description_pt', 'technologies', 'images', 'image_tag']
+    # Project thumbnail
     readonly_fields = ['image_tag']
 
 admin.site.register(Project, ProjectAdmin)
