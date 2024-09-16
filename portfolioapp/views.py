@@ -55,14 +55,14 @@ def about(request) -> HttpResponse:
     context = {
         "current_year": datetime.now().year
     }
-    return render(request, 'about.jinja2', context)
+    return render(request, 'under_construction.jinja2', context)
 
 def contact(request) -> HttpResponse:
     """Contact page"""
     context = {
         "current_year": datetime.now().year
     }
-    return render(request, 'contact.jinja2', context)
+    return render(request, 'under_construction.jinja2', context)
 
 def projects(request) -> HttpResponse:
     """Projects page"""
