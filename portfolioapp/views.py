@@ -62,7 +62,7 @@ def contact(request) -> HttpResponse:
     context = {
         "current_year": datetime.now().year
     }
-    return render(request, 'under_construction.jinja2', context)
+    return render(request, 'contact.jinja2', context)
 
 def projects(request) -> HttpResponse:
     """Projects page"""
