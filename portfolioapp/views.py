@@ -1,11 +1,18 @@
+from typing import Any
 from django.shortcuts import render, HttpResponse
 from django.http import JsonResponse
+from django.views.generic import TemplateView, ListView, DetailView
 from .models import Project
 from datetime import datetime
 
-# Create your views here.
-def index(request) -> HttpResponse:
-    """List services"""
+class BasePortfolioMixin:
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['current_year'] = datetime.now().year
+        return context
+    
+class IndexView(BasePortfolioMixin, TemplateView):
+    template_name = 'index.jinja2'
     services = {
         "Desenvolvimento de software": [
             "Aplicações web responsivas",
@@ -42,41 +49,47 @@ def index(request) -> HttpResponse:
         ]
     }
 
-    # Convert dictionary items to a list of tuples
-    services_list = list(services.items())
-    context = {
-        "current_year": datetime.now().year,
-        'services': services_list
-    }
-    return render(request, 'index.jinja2', context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['services'] = self.services.items()
+        return context
 
-def about(request) -> HttpResponse:
-    """About me page"""
-    context = {
-        "current_year": datetime.now().year
-    }
-    return render(request, 'under_construction.jinja2', context)
+class AboutView(BasePortfolioMixin, TemplateView):
+    template_name = 'under_construction.jinja2'
 
-def contact(request) -> HttpResponse:
-    """Contact page"""
-    context = {
-        "current_year": datetime.now().year
-    }
-    return render(request, 'contact.jinja2', context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+    
+class ContactView(BasePortfolioMixin, TemplateView):
+    template_name = 'contact.jinja2'
 
-def projects(request) -> HttpResponse:
-    """Projects page"""
-    projects = Project.objects.all()
-    return render(request, 'projects.jinja2', {'projects': projects, "current_year": datetime.now().year})
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+    
+class ProjectsView(BasePortfolioMixin, ListView):
+    template_name = 'projects.jinja2'
+    model = Project
 
-def project(request, id) -> JsonResponse:
-    """Project details endpoint"""
-    project = Project.objects.get(id=id)
-    return JsonResponse({
-        'title_en': project.title_en,
-        'title_pt': project.title_pt,
-        'description_en': project.description_en,
-        'description_pt': project.description_pt,
-        'technologies': [technology.name for technology in project.technologies.all()],
-        'images': project.images.image.url
-    })
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        projects = Project.objects.all()
+        context['projects'] = projects
+        return context
+
+class ProjectView(BasePortfolioMixin, DetailView):
+    model = Project
+
+    def render_to_response(self, context: dict[str, Any], **response_kwargs: Any) -> HttpResponse:
+        project = self.get_object()
+        data = {
+            'title_en': project.title_en,
+            'title_pt': project.title_pt,
+            'description_en': project.description_en,
+            'description_pt': project.description_pt,
+            'technologies': [technology.name for technology in project.technologies.all()],
+            'images': project.images.image.url
+        }
+        return JsonResponse(data)
+    

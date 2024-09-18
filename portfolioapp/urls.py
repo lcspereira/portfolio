@@ -1,10 +1,10 @@
 from django.urls import path, include
-from . import views
+from .views import AboutView, ContactView, IndexView, ProjectsView
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('about/', views.about, name='about'),
-    path('contact/', views.contact, name='contact'),
-    path('projects/', views.projects, name='projects'),
+    path('', IndexView.as_view(), name='index'),
+    path('about/', AboutView.as_view(), name='about'),
+    path('contact/', ContactView.as_view(), name='contact'),
+    path('projects/', ProjectsView.as_view(), name='projects'),
     path("summernote/", include("django_summernote.urls"))
 ]
