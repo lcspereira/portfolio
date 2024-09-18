@@ -9,6 +9,13 @@ class BasePortfolioMixin:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['current_year'] = datetime.now().year
+        context['description'] = 'Lucas Pereira - Engenheiro de software freelancer - Desenvolvimento de software, websites, e-commerce, dados, inteligência artificial e machine learning.'
+        keywords = [
+            'desenvolvimento de software', 'freelancer', 'engenharia de software', 'websites', 'e-commerce', 'dados', 'inteligência artificial',
+            'machine learning', 'python', 'django', 'javascript', 'react', 'vue', 'sql', 'nosql', 'odoo', 'wordpress', 'woocommerce',
+            'seo', 'web scraping', 'data science', 'deep learning', 'visão computacional'
+        ]
+        context['keywords'] = ', '.join(keywords)
         return context
     
 class IndexView(BasePortfolioMixin, TemplateView):
