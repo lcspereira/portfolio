@@ -9,11 +9,33 @@ class BasePortfolioMixin:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['current_year'] = datetime.now().year
+        
+        # SEO
         context['description'] = 'Lucas Pereira - Engenheiro de software freelancer - Desenvolvimento de software, websites, e-commerce, dados, inteligência artificial e machine learning.'
         keywords = [
-            'desenvolvimento de software', 'freelancer', 'engenharia de software', 'websites', 'e-commerce', 'dados', 'inteligência artificial',
-            'machine learning', 'python', 'django', 'javascript', 'react', 'vue', 'sql', 'nosql', 'odoo', 'wordpress', 'woocommerce',
-            'seo', 'web scraping', 'data science', 'deep learning', 'visão computacional'
+            'desenvolvimento de software', 'software development',
+            'freelancer',
+            'engenharia de software', 'software engineering',
+            'engenheiro de software', 'software engineer',
+            'websites',
+            'e-commerce',
+            'dados', 'data',
+            'inteligência artificial', 'artificial intelligence',
+            'machine learning', 
+            'python',
+            'django',
+            'javascript',
+            'vue',
+            'sql',
+            'nosql',
+            'odoo',
+            'wordpress',
+            'woocommerce',
+            'seo',
+            'web scraping',
+            'data science',
+            'deep learning',
+            'visão computacional', 'computer vision'
         ]
         context['keywords'] = ', '.join(keywords)
         return context
