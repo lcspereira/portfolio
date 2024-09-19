@@ -11,7 +11,7 @@ class BasePortfolioMixin:
         context['current_year'] = datetime.now().year
         
         # SEO
-        context['description'] = 'Lucas Pereira - Engenheiro de software freelancer - Desenvolvimento de software, websites, e-commerce, dados, inteligência artificial e machine learning.'
+        context['description'] = 'Lucas Pereira - Engenheiro de software - Freelancer - Desenvolvimento de software, websites, e-commerce, dados, inteligência artificial e machine learning.'
         keywords = [
             'desenvolvimento de software', 'software development',
             'freelancer',
