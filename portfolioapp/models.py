@@ -1,10 +1,11 @@
 from django.db import models
 from django.utils.html import mark_safe
+from django.conf import settings
 
 # Create your models here.
 
 class Image(models.Model):
-    image = models.ImageField(upload_to='static/img')
+    image = models.ImageField(upload_to=f"{settings.STATIC_ROOT}/img")
 
     def __str__(self):
         return self.image.url
