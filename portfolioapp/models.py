@@ -5,7 +5,7 @@ from django.conf import settings
 # Create your models here.
 
 class Image(models.Model):
-    image = models.ImageField(upload_to=f"{settings.STATIC_ROOT}/img")
+    image = models.ImageField(upload_to="img")
 
     def __str__(self):
         return self.image.url
